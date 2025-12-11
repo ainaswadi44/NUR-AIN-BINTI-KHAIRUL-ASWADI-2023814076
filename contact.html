@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact & Feedback</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            padding-top: 30px;
+            color: white;
+        }
+
+        .container {
+            width: 420px;
+            padding: 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0,255,255,0.3);
+        }
+
+        h2 {
+            text-align: center;
+            color: #00f0ff;
+            margin-bottom: 18px;
+            text-shadow: 0 0 5px #00f0ff;
+        }
+
+        label {
+            font-weight: bold;
+            color: #00f0ff;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #00f0ff;
+            border-radius: 8px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            outline: none;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #00ffea;
+            box-shadow: 0 0 8px #00f0ff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #00f0ff;
+            border: none;
+            color: #000;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background: #00c6ff;
+            transform: scale(1.05);
+        }
+
+        .success {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            color: white;
+            background: #4caf50;
+            border-radius: 10px;
+        }
+
+        .accordion {
+            background-color: #00f0ff;
+            color: #000;
+            cursor: pointer;
+            padding: 12px;
+            width: 100%;
+            border: none;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            text-align: center;
+            outline: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .accordion:hover {
+            background-color: #00c6ff;
+        }
+
+        .panel {
+            padding: 0 0;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .panel a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .panel a i {
+            font-size: 18px;
+        }
+
+        .panel a.whatsapp { background: #25D366; }
+        .panel a.references { background: #6f42c1; }
+        .panel a.resume { background: #ff9800; }
+
+        .panel a:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2><i class="fa-solid fa-address-book"></i> Contact & Feedback</h2>
+
+        <form id="feedbackForm">
+            <label><i class="fa-solid fa-user"></i> Your Name</label>
+            <input type="text" id="name" required>
+
+            <label><i class="fa-solid fa-envelope"></i> Your Email</label>
+            <input type="email" id="email" required>
+
+            <label><i class="fa-solid fa-message"></i> Message</label>
+            <textarea id="message" rows="4" required></textarea>
+
+            <button type="submit"><i class="fa-solid fa-paper-plane"></i> Send Feedback</button>
+        </form>
+
+        <div class="success" id="successBox">
+            ✔ Your feedback has been sent!
+        </div>
+
+        <button class="accordion"><i class="fa-solid fa-hand-pointer"></i> Contact Options</button>
+        
+        <div class="panel">
+            <a href="https://wa.me/60193236352" target="_blank" class="whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="references.html" target="_blank" class="references">
+                <i class="fa-solid fa-user-check"></i> References
+            </a>
+            <a href="resume.pdf" download class="resume">
+                <i class="fa-solid fa-file-arrow-down"></i> Download Resume PDF
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+     
+        document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+
+            let recipient = "nrainn44@gmail.com";
+            let subject = "New Feedback from " + name;
+            let body = `Name: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
+
+            let mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${body}`;
+            window.open(mailtoLink, "_blank");
+
+            document.getElementById("successBox").style.display = "block";
+        });
+        
+        const acc = document.getElementsByClassName("accordion")[0];
+        const panel = document.getElementsByClassName("panel")[0];
+
+        acc.addEventListener("click", () => {
+            panel.style.display = panel.style.display === "flex" ? "none" : "flex";
+        });
+    </script>
+
+</body>
+</html>
+
